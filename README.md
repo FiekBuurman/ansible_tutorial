@@ -8,4 +8,5 @@
 - git commit -m "updated readme file"
 - git push origin main
 - git add README.md && git commit -m "updated readme file"
-- history
+- git add inventory
+- git commit -m "first inventory file"
