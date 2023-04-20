@@ -23,4 +23,31 @@ private_key_file = ~/.ssh/ansible
 - ansible all -m ping
 - ansible all --list-hosts
 - ansible all -m gather_facts
-- ansible all -m gather_facts --limit 192.168.2.210 
+- ansible all -m gather_facts --limit 192.168.2.210
+
+# 05
+- ansible all -m apt -a update_cache=true // gives error because not sudo
+- ansible all -m apt -a update_cache=true --become --ask-become-pass
+- ansible all -m apt -a name=vim-nox --become --ask-become-pass
+- ansible all -m apt -a name=tmux --become --ask-become-pass
+- ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass
+- ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
