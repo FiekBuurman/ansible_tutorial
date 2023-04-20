@@ -8,3 +8,4 @@
 - git commit -m "updated readme file"
 - git push origin main
 - git add README.md && git commit -m "updated readme file"
+- history
