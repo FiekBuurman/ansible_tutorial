@@ -33,8 +33,9 @@ private_key_file = ~/.ssh/ansible
 - ansible all -m apt -a "name=snapd state=latest" --become --ask-become-pass
 - ansible all -m apt -a "upgrade=dist" --become --ask-become-pass
 
-
-
+# 06
+- ansible-playbook --ask-become-pass install_apache.yml
+- ansible-playbook --ask-become-pass remove_apache.yml
 
 
 
