@@ -3,16 +3,10 @@
   become: true
   tasks:
 
-  - name: update repo index
-    apt:
-      update_cache: true
-
-  - name: remove apache2 package
-    apt:
-      name: apache2
+  - name: remove apache and php packages on Debian
+    package:
+      name: 
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
       state: absent
-
-  - name: remove php support for apache
-    apt:
-      name: libapache2-mod-php
-      state: absent
+      update_cache: yes
