@@ -1,3 +1,4 @@
+# ansible-playbook --ask-become-pass remove_apache.yml
 ---
 - hosts: all
   become: true
