@@ -4,10 +4,29 @@
   become: true
   tasks:
 
-  - name: install apache and php
-    package:
+  # compact verion
+  #- name: install apache and php
+  #  package:
+  #    name: 
+  #      - "{{ apache_package }}"
+  #      - "{{ php_package }}"
+  #    state: latest
+  #    update_cache: yes
+
+  - name: install apache and php for Ubuntu & Debian servers
+    apt:
       name: 
-        - "{{ apache_package }}"
-        - "{{ php_package }}"
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: yes 
+    when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+  - name: install apache and php for CentOS servers
+    dnf:
+      name:
+        - httpd
+        - php
       state: latest
       update_cache: yes
+    when: ansible_distribution == "CentOS"

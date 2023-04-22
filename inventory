@@ -11,8 +11,22 @@
 #192.168.2.247
 #192.168.2.250
 #192.168.2.234
-192.168.2.222 apache_package=apache2 php_package=libapache2-mod-php
-192.168.2.230 apache_package=apache2 php_package=libapache2-mod-php
-192.168.2.231 apache_package=apache2 php_package=libapache2-mod-php
-192.168.2.232 apache_package=apache2 php_package=libapache2-mod-php
-192.168.2.233 apache_package=httpd php_package=php
+
+
+#192.168.2.222 apache_package=apache2 php_package=libapache2-mod-php
+#192.168.2.230 apache_package=apache2 php_package=libapache2-mod-php
+#192.168.2.231 apache_package=apache2 php_package=libapache2-mod-php
+#192.168.2.232 apache_package=apache2 php_package=libapache2-mod-php
+#192.168.2.233 apache_package=httpd php_package=php
+
+[web_servers]
+192.168.2.222
+192.168.2.233
+
+[db_servers]
+192.168.2.230
+192.168.2.231
+
+[file_servers]
+192.168.2.232
+
