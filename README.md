@@ -37,8 +37,11 @@ private_key_file = ~/.ssh/ansible
 - ansible-playbook --ask-become-pass install_apache.yml
 - ansible-playbook --ask-become-pass remove_apache.yml
 
-# 07
-
+# 10
+- ansible-playbook --list-tags site.yml
+- ansible-playbook --tags centos --ask-become-pass site.yml
+- ansible-playbook --tags db --ask-become-pass site.yml
+- ansible-playbook --tags "db,apache" --ask-become-pass site.yml
 
 
 
