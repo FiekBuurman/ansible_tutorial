@@ -1,23 +1,33 @@
-# ansible-playbook --ask-become-pass site.yml
+# ansible-playbook site.yml
 ---
 
 - hosts: all
   become: true
   pre_tasks:
 
-  - name: install updates CentOs
+  - name: update repo cache CentOs
     tags: always
     dnf:
-      update_only: yes
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "CentOS"
 
-  - name: install updates Debian and Ubuntu
+  - name: update repo cache Debian and Ubuntu
     tags: always
     apt:
-      upgrade: dist
       update_cache: yes
+    changed_when: false
     when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: add ssh key for simone
+    tags: always
+    authorized_key:
+      user: simone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMNCSj7tec2/AsUqMAQDSb4EVZhNyXkBE9dFbxdrgxrm anisble"
 
 - hosts: workstations
   become: true
