@@ -58,22 +58,6 @@
       state: latest
     when: ansible_distribution == "CentOS"
 
-  - name: change email address for admin
-    tags: apache,centos,httpd
-    lineinfile:
-      path: /etc/httpd/conf/httpd.conf
-      regexp: '^ServerAdmin'
-      line: ServerAdmin fiekbuurman@gmail.com
-    when: ansible_distribution == "CentOS"
-    register: httpd
-
-  - name: restart httpd (CentOs)
-    tags: apache,centos,httpd
-    service:
-      name: httpd
-      state: restarted
-    when: httpd.changed
-
   - name: copy default html files for site
     tags: apache, apache2, httpd
     copy:
@@ -83,13 +67,6 @@
       group: root
       mode: 0644
 
-  - name: start httpd (CentOs)
-    tags: apache,centos,httpd
-    service:
-      name: httpd
-      state: started
-      enabled: yes
-    when: ansible_distribution == "CentOS"
 
 - hosts: db_servers
   become: true
@@ -100,7 +77,7 @@
     dnf:
       name: mariadb
       state: latest
-    when: ansible_distribution == "CentOS"
+    when: ansible_distribution == "CentOs"
 
   - name: install mariadb package (Unbuntu or Debian)
     tags: db,mariadb,ubuntu,debian
