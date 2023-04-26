@@ -1,36 +1,26 @@
-- name: install apache and php for Ubuntu & Debian servers
-  tags: apache,apache2,ubuntu 
-  apt:
+- name: install apache and php packages
+  tags: apache,httpd,php
+  package:
     name: 
-      - apache2
-      - libapache2-mod-php
+      - "{{ apache_package_name }}"
+      - "{{ php_package_name }}"
     state: latest
-  when: ansible_distribution == "Ubuntu" or ansible_distribution == "Debian"
 
-- name: install apache and php for CentOS servers
-  tags: apache,centos,httpd
-  dnf:
-    name:
-      - httpd
-      - php
-    state: latest
-  when: ansible_distribution == "CentOS"
+- name: start and enable apache service
+  tags: apache,httpd
+  service:
+    name: "{{ apache_service }}"
+    state: started
+    enabled: yes
 
 - name: change email address for admin
   tags: apache,centos,httpd
   lineinfile:
     path: /etc/httpd/conf/httpd.conf
     regexp: '^ServerAdmin'
-    line: ServerAdmin fiekbuurman@gmail.com
+    line: ServerAdmin fiekbuurman@gmail.com2
   when: ansible_distribution == "CentOS"
-  register: httpd
-
-- name: restart httpd (CentOs)
-  tags: apache,centos,httpd
-  service:
-    name: httpd
-    state: restarted
-  when: httpd.changed
+  notify: restart_apache
 
 - name: copy default html files for site
   tags: apache, apache2, httpd
@@ -40,11 +30,3 @@
     owner: root
     group: root
     mode: 0644
-
-- name: start httpd (CentOs)
-  tags: apache,centos,httpd
-  service:
-    name: httpd
-    state: started
-    enabled: yes
-  when: ansible_distribution == "CentOS"
